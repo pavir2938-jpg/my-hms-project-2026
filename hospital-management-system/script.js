@@ -1,0 +1,22 @@
+const $ = (s, root=document) => root.querySelector(s);
+const $$ = (s, root=document) => [...root.querySelectorAll(s)];
+const loginScreen=$('#loginScreen'), app=$('#app');
+$('#loginForm').addEventListener('submit',e=>{e.preventDefault();if($('#username').value==='admin'&&$('#password').value==='admin123'){loginScreen.classList.add('hidden');app.classList.remove('hidden');}else $('#loginError').textContent='Invalid demo username or password.';});
+function showPage(name){$$('.page').forEach(p=>p.classList.toggle('active-page',p.id===`page-${name}`));$$('.nav-item[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#pageHeading').textContent=name[0].toUpperCase()+name.slice(1);$('.sidebar').classList.remove('open');}
+$('#navigation').addEventListener('click',e=>{const b=e.target.closest('[data-page]');if(b)showPage(b.dataset.page)});
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.go)));
+$('#mobileMenu').addEventListener('click',()=>$('.sidebar').classList.toggle('open'));
+$('#logoutBtn').addEventListener('click',()=>{app.classList.add('hidden');loginScreen.classList.remove('hidden')});
+function openModal(id){$('#'+id).classList.add('open')} function closeModal(id){$('#'+id).classList.remove('open')}
+$$('.modal-backdrop').forEach(back=>back.addEventListener('click',e=>{if(e.target===back)back.classList.remove('open')}));
+let patients=[['PT-1048','Ananya Sharma','22 / Female','9876543210','B+'],['PT-1047','Rohan Kumar','35 / Male','9876501234','O+'],['PT-1046','Sneha Iyer','28 / Female','9988776655','A+']];
+let appointments=[['AP-2001','Ananya Sharma','Dr. Priya Nair','23 Nov 2026','10:00 AM','Confirmed'],['AP-2002','Rohan Kumar','Dr. Rahul Mehta','23 Nov 2026','11:00 AM','Confirmed']];
+function renderPatients(){const body=$('#patientsTable');if(body)body.innerHTML=patients.map(p=>`<tr>${p.map(v=>`<td>${escapeHtml(v)}</td>`).join('')}<td><span class="pill green-pill">Active</span></td></tr>`).join('');const count=$('#patientCount');if(count)count.textContent=`${patients.length} patients`;}
+function renderAppointments(){const body=$('#appointmentsTable');if(body)body.innerHTML=appointments.map(a=>`<tr>${a.map(v=>`<td>${escapeHtml(v)}</td>`).join('')}<td><button class="text-btn" onclick="cancelAppointment('${a[0]}')">Cancel</button></td></tr>`).join('');const recent=$('#recentAppointments');if(recent)recent.innerHTML=appointments.slice(0,3).map(a=>`<tr><td>${escapeHtml(a[1])}</td><td>${escapeHtml(a[2])}</td><td>${escapeHtml(a[3])} · ${escapeHtml(a[4])}</td><td>General</td><td><span class="pill blue-pill">${escapeHtml(a[5])}</span></td></tr>`).join('');}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+function cancelAppointment(id){appointments=appointments.map(a=>a[0]===id?[...a.slice(0,5),'Cancelled']:a);renderAppointments();toast('Appointment cancelled')}
+$$('.modal').forEach(form=>form.addEventListener('submit',e=>{e.preventDefault();const data=Object.fromEntries(new FormData(form));switch(form.dataset.kind){case'patient':patients.unshift([`PT-${1050+patients.length}`,data.name,`${data.age} / ${data.gender}`,data.phone,data.blood]);renderPatients();toast('Patient registered successfully');break;case'appointment':appointments.unshift([`AP-${2001+appointments.length}`,data.patient,data.doctor,data.date,data.time,'Confirmed']);renderAppointments();toast('Appointment booked successfully');break;case'doctor':toast('Doctor details saved in this demo session');break;case'bill':toast('Bill generated in this demo session');break;case'medicine':toast('Medicine added in this demo session');break;case'lab':toast('Laboratory test added in this demo session');break;case'admission':toast('Patient admission recorded in this demo session');break;}form.reset();form.closest('.modal-backdrop').classList.remove('open')}));
+const patientSearch=$('#patientSearch');if(patientSearch)patientSearch.addEventListener('input',()=>{$$('#patientsTable tr').forEach(row=>row.hidden=!row.textContent.toLowerCase().includes(patientSearch.value.toLowerCase()))});
+const apSearch=$('#appointmentSearch');if(apSearch)apSearch.addEventListener('input',()=>{$$('#appointmentsTable tr').forEach(row=>row.hidden=!row.textContent.toLowerCase().includes(apSearch.value.toLowerCase()))});
+renderPatients();renderAppointments();

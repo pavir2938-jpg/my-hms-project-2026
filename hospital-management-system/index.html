@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CarePlus | Hospital Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="loginScreen" class="login-screen">
+    <div class="login-art">
+      <div class="brand-mark">✚</div>
+      <p class="eyebrow">CARE TODAY. HEALTHIER TOMORROW.</p>
+      <h1>Hospital<br>Management System</h1>
+      <p class="art-copy">One connected place for better hospital care.</p>
+      <div class="art-cross cross-one">✚</div><div class="art-cross cross-two">✚</div>
+      <div class="art-circles"><span></span><span></span><span></span></div>
+    </div>
+    <form id="loginForm" class="login-card">
+      <div class="small-logo">✚ <span>CarePlus</span></div>
+      <h2>Welcome Back!</h2><p class="muted">Sign in to your hospital workspace</p>
+      <label>Username</label><input id="username" value="admin" required placeholder="Enter username">
+      <label>Password</label><input id="password" type="password" value="admin123" required placeholder="Enter password">
+      <button class="primary-btn full" type="submit">Login <span>→</span></button>
+      <p class="login-hint">Demo login: <b>admin</b> / <b>admin123</b></p>
+      <p id="loginError" class="error"></p>
+    </form>
+  </div>
+
+  <div id="app" class="app hidden">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-icon">✚</div><div><b>CarePlus</b><small>HOSPITAL SYSTEM</small></div></div>
+      <div class="nav-label">WORKSPACE</div>
+      <nav id="navigation">
+        <button class="nav-item active" data-page="dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-item" data-page="patients"><span>♙</span> Patients</button>
+        <button class="nav-item" data-page="appointments"><span>▣</span> Appointments</button>
+        <button class="nav-item" data-page="doctors"><span>⚕</span> Doctors</button>
+        <button class="nav-item" data-page="records"><span>▤</span> Patient Records</button>
+        <button class="nav-item" data-page="billing"><span>₹</span> Billing</button>
+        <button class="nav-item" data-page="pharmacy"><span>✚</span> Pharmacy</button>
+        <button class="nav-item" data-page="laboratory"><span>⚗</span> Laboratory</button>
+        <button class="nav-item" data-page="admissions"><span>▣</span> Admissions</button>
+        <button class="nav-item" data-page="staff"><span>♧</span> Staff</button>
+        <button class="nav-item" data-page="reports"><span>▥</span> Reports</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="help-box"><b>Need help?</b><small>Contact system support</small><button onclick="toast('Support request noted')">Get support →</button></div><button class="nav-item logout" id="logoutBtn"><span>↪</span> Logout</button></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu">☰</button>
+        <div><span class="breadcrumb">Workspace</span><span class="crumb-sep">/</span><b id="pageHeading">Dashboard</b></div>
+        <div class="top-actions"><button class="icon-btn" aria-label="Notifications" onclick="toast('You are all caught up!')">♧<i></i></button><div class="profile"><div class="avatar">A</div><div><b>Admin</b><small>Administrator</small></div><span>⌄</span></div></div>
+      </header>
+
+      <section class="page active-page" id="page-dashboard">
+        <div class="welcome-row"><div><p class="eyebrow blue">SUNDAY, 22 NOVEMBER 2026</p><h1>Good evening, Admin <span>✦</span></h1><p class="muted">Here’s what’s happening at your hospital today.</p></div><button class="outline-btn" onclick="window.print()">⇩ Export overview</button></div>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-icon blue-bg">♙</div><div><small>Total Patients</small><h2>1,248</h2><p class="trend positive">↗ 12.8% <span>vs last month</span></p></div><div class="sparkline blue-line">▁▂▃▂▄▅▆</div></div>
+          <div class="stat-card"><div class="stat-icon green-bg">▣</div><div><small>Appointments Today</small><h2>86</h2><p class="trend positive">↗ 8.2% <span>vs yesterday</span></p></div><div class="sparkline green-line">▂▃▂▄▃▅▆</div></div>
+          <div class="stat-card"><div class="stat-icon purple-bg">⚕</div><div><small>Available Doctors</small><h2>42</h2><p class="trend neutral">● 6 on leave today</p></div><div class="sparkline purple-line">▃▂▄▃▅▄▆</div></div>
+          <div class="stat-card"><div class="stat-icon orange-bg">₹</div><div><small>Total Revenue</small><h2>₹2,85,000</h2><p class="trend positive">↗ 14.5% <span>vs last month</span></p></div><div class="sparkline orange-line">▁▃▂▄▅▄▆</div></div>
+        </div>
+        <div class="content-grid">
+          <div class="panel chart-panel"><div class="panel-heading"><div><h3>Appointments Overview</h3><p class="muted">Monthly appointment activity</p></div><select id="chartPeriod"><option>Last 6 months</option><option>This year</option></select></div><div class="chart"><div class="y-labels"><span>150</span><span>100</span><span>50</span><span>0</span></div><div class="chart-area"><div class="grid-lines"><i></i><i></i><i></i><i></i></div><div class="bars"><div style="height:65%"><b>Jan</b></div><div style="height:54%"><b>Feb</b></div><div style="height:83%"><b>Mar</b></div><div style="height:74%"><b>Apr</b></div><div style="height:65%"><b>May</b></div><div style="height:76%"><b>Jun</b></div></div></div></div></div>
+          <div class="panel quick-panel"><div class="panel-heading"><div><h3>Quick Actions</h3><p class="muted">Common tasks</p></div></div><button class="quick-action" data-go="patients"><span class="qa-icon teal">♙</span><span><b>Register Patient</b><small>Add a new patient profile</small></span><strong>→</strong></button><button class="quick-action" data-go="appointments"><span class="qa-icon green">▣</span><span><b>Book Appointment</b><small>Schedule a doctor visit</small></span><strong>→</strong></button><button class="quick-action" data-go="reports"><span class="qa-icon violet">▥</span><span><b>View Reports</b><small>Check hospital analytics</small></span><strong>→</strong></button></div>
+        </div>
+        <div class="panel table-panel"><div class="panel-heading"><div><h3>Recent Appointments</h3><p class="muted">Latest scheduled patient visits</p></div><button class="text-btn" data-go="appointments">View all appointments →</button></div><div class="table-wrap"><table><thead><tr><th>Patient</th><th>Doctor</th><th>Date & Time</th><th>Department</th><th>Status</th></tr></thead><tbody id="recentAppointments"></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-patients">
+        <div class="page-title"><div><p class="eyebrow blue">PATIENT DIRECTORY</p><h1>Patients</h1><p class="muted">Register and manage patient information.</p></div><button class="primary-btn" onclick="openModal('patientModal')">＋ Add Patient</button></div>
+        <div class="panel"><div class="toolbar"><input id="patientSearch" class="search" placeholder="⌕  Search patients by name or ID..."><span class="muted" id="patientCount"></span></div><div class="table-wrap"><table><thead><tr><th>Patient ID</th><th>Patient Name</th><th>Age / Gender</th><th>Phone</th><th>Blood Group</th><th>Status</th></tr></thead><tbody id="patientsTable"></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-appointments">
+        <div class="page-title"><div><p class="eyebrow blue">SCHEDULE & VISITS</p><h1>Appointments</h1><p class="muted">Book, reschedule and track doctor appointments.</p></div><button class="primary-btn" onclick="openModal('appointmentModal')">＋ Book Appointment</button></div>
+        <div class="stats-strip"><div><small>Today's visits</small><b>86</b></div><div><small>Waiting</small><b>12</b></div><div><small>Completed</small><b>64</b></div><div><small>Cancelled</small><b>3</b></div></div>
+        <div class="panel"><div class="toolbar"><input class="search" id="appointmentSearch" placeholder="⌕  Search appointments..."><select><option>All statuses</option><option>Confirmed</option><option>Completed</option></select></div><div class="table-wrap"><table><thead><tr><th>Appointment ID</th><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th><th>Status</th><th>Action</th></tr></thead><tbody id="appointmentsTable"></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-doctors">
+        <div class="page-title"><div><p class="eyebrow blue">MEDICAL TEAM</p><h1>Doctor Management</h1><p class="muted">Manage doctor profiles, departments and availability.</p></div><button class="primary-btn" onclick="openModal('doctorModal')">＋ Add Doctor</button></div>
+        <div class="doctor-grid" id="doctorCards"></div>
+      </section>
+
+      <section class="page" id="page-records">
+        <div class="page-title"><div><p class="eyebrow blue">CLINICAL INFORMATION</p><h1>Patient Records</h1><p class="muted">Medical history, diagnosis and treatment details.</p></div><button class="primary-btn" onclick="toast('Record form is ready for integration')">＋ Add Medical Record</button></div>
+        <div class="panel"><div class="toolbar"><input class="search" placeholder="⌕  Search patient records..."></div><div class="table-wrap"><table><thead><tr><th>Record ID</th><th>Patient</th><th>Diagnosis</th><th>Doctor</th><th>Last Updated</th><th>Type</th></tr></thead><tbody><tr><td>#MR-1024</td><td>Ananya Sharma</td><td>Seasonal influenza</td><td>Dr. Priya Nair</td><td>22 Nov 2026</td><td><span class="pill blue-pill">Consultation</span></td></tr><tr><td>#MR-1023</td><td>Rohan Kumar</td><td>Vitamin D deficiency</td><td>Dr. Rahul Mehta</td><td>21 Nov 2026</td><td><span class="pill purple-pill">Follow-up</span></td></tr><tr><td>#MR-1022</td><td>Sneha Iyer</td><td>Migraine</td><td>Dr. Sneha Iyer</td><td>20 Nov 2026</td><td><span class="pill blue-pill">Consultation</span></td></tr></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-billing">
+        <div class="page-title"><div><p class="eyebrow blue">PAYMENTS & INVOICES</p><h1>Billing Management</h1><p class="muted">Generate patient bills and track payments.</p></div><button class="primary-btn" onclick="openModal('billModal')">＋ Generate Bill</button></div>
+        <div class="stats-strip"><div><small>Today's collection</small><b>₹48,500</b></div><div><small>Pending payments</small><b>₹12,800</b></div><div><small>Invoices generated</small><b>128</b></div><div><small>Paid invoices</small><b>109</b></div></div>
+        <div class="panel"><div class="toolbar"><input class="search" placeholder="⌕  Search invoice or patient..."><select><option>All payments</option><option>Paid</option><option>Pending</option></select></div><div class="table-wrap"><table><thead><tr><th>Invoice ID</th><th>Patient</th><th>Date</th><th>Services</th><th>Amount</th><th>Payment</th></tr></thead><tbody><tr><td>#INV-2401</td><td>Ananya Sharma</td><td>22 Nov 2026</td><td>Consultation, Lab test</td><td>₹1,750</td><td><span class="pill green-pill">Paid</span></td></tr><tr><td>#INV-2400</td><td>Rohan Kumar</td><td>22 Nov 2026</td><td>Consultation</td><td>₹500</td><td><span class="pill yellow-pill">Pending</span></td></tr><tr><td>#INV-2399</td><td>Sneha Iyer</td><td>21 Nov 2026</td><td>Lab test, Medicine</td><td>₹1,250</td><td><span class="pill green-pill">Paid</span></td></tr></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-pharmacy">
+        <div class="page-title"><div><p class="eyebrow blue">MEDICINE INVENTORY</p><h1>Pharmacy Management</h1><p class="muted">Monitor medicine stock, pricing and availability.</p></div><button class="primary-btn" onclick="openModal('medicineModal')">＋ Add Medicine</button></div>
+        <div class="stats-strip"><div><small>Medicine items</small><b>156</b></div><div><small>In stock</small><b>139</b></div><div><small>Low stock</small><b>17</b></div><div><small>Today's sales</small><b>₹8,450</b></div></div>
+        <div class="panel"><div class="toolbar"><input class="search" placeholder="⌕  Search medicine..."><select><option>All stock status</option><option>In Stock</option><option>Low Stock</option></select></div><div class="table-wrap"><table><thead><tr><th>Medicine Name</th><th>Category</th><th>Stock Quantity</th><th>Price (₹)</th><th>Status</th></tr></thead><tbody><tr><td>Paracetamol 500mg</td><td>Pain relief</td><td>500</td><td>10</td><td><span class="pill green-pill">In Stock</span></td></tr><tr><td>Amoxicillin 250mg</td><td>Antibiotic</td><td>250</td><td>25</td><td><span class="pill green-pill">In Stock</span></td></tr><tr><td>Cetirizine 10mg</td><td>Antihistamine</td><td>18</td><td>20</td><td><span class="pill yellow-pill">Low Stock</span></td></tr><tr><td>Omeprazole 20mg</td><td>Antacid</td><td>120</td><td>35</td><td><span class="pill green-pill">In Stock</span></td></tr></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-laboratory">
+        <div class="page-title"><div><p class="eyebrow blue">TESTS & RESULTS</p><h1>Laboratory Reports</h1><p class="muted">Manage medical tests and report availability.</p></div><button class="primary-btn" onclick="openModal('labModal')">＋ Add Test</button></div>
+        <div class="panel"><div class="toolbar"><input class="search" placeholder="⌕  Search patient or test..."><select><option>All reports</option><option>Ready</option><option>Processing</option></select></div><div class="table-wrap"><table><thead><tr><th>Patient Name</th><th>Test Type</th><th>Date</th><th>Assigned Lab</th><th>Report</th><th>Status</th></tr></thead><tbody><tr><td>Ananya Sharma</td><td>Blood Test</td><td>22 Nov 2026</td><td>Central Lab</td><td><a href="#" onclick="toast('Sample report preview')">View report</a></td><td><span class="pill green-pill">Ready</span></td></tr><tr><td>Rohan Kumar</td><td>Urine Test</td><td>22 Nov 2026</td><td>Central Lab</td><td><a href="#" onclick="toast('Report is processing')">View status</a></td><td><span class="pill yellow-pill">Processing</span></td></tr><tr><td>Sneha Iyer</td><td>Thyroid Test</td><td>21 Nov 2026</td><td>Diagnostics</td><td><a href="#" onclick="toast('Sample report preview')">View report</a></td><td><span class="pill green-pill">Ready</span></td></tr></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-admissions">
+        <div class="page-title"><div><p class="eyebrow blue">INPATIENT SERVICES</p><h1>Admissions & Discharge</h1><p class="muted">Track admissions, room allocation and discharge.</p></div><button class="primary-btn" onclick="openModal('admissionModal')">＋ Admit Patient</button></div>
+        <div class="stats-strip"><div><small>Currently admitted</small><b>74</b></div><div><small>Available beds</small><b>26</b></div><div><small>Discharged today</small><b>11</b></div><div><small>Occupancy rate</small><b>74%</b></div></div>
+        <div class="panel"><div class="table-wrap"><table><thead><tr><th>Patient</th><th>Patient ID</th><th>Ward</th><th>Room / Bed</th><th>Admitted</th><th>Status</th></tr></thead><tbody><tr><td>Ananya Sharma</td><td>PT-1048</td><td>General</td><td>G-204 / 2</td><td>20 Nov 2026</td><td><span class="pill green-pill">Admitted</span></td></tr><tr><td>Rohan Kumar</td><td>PT-1047</td><td>Cardiology</td><td>C-105 / 1</td><td>21 Nov 2026</td><td><span class="pill green-pill">Admitted</span></td></tr><tr><td>Meera Rao</td><td>PT-1042</td><td>General</td><td>G-102 / 3</td><td>18 Nov 2026</td><td><span class="pill blue-pill">Discharge planned</span></td></tr></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-staff">
+        <div class="page-title"><div><p class="eyebrow blue">HOSPITAL TEAM</p><h1>Staff Management</h1><p class="muted">Maintain staff roles, contact details and schedules.</p></div><button class="primary-btn" onclick="toast('Add staff form is ready for integration')">＋ Add Staff</button></div>
+        <div class="doctor-grid"><div class="staff-card"><div class="avatar">KM</div><div><b>Kavya Menon</b><small>Nursing Supervisor</small><span class="pill green-pill">On duty</span></div></div><div class="staff-card"><div class="avatar purple-avatar">AR</div><div><b>Arjun Reddy</b><small>Lab Technician</small><span class="pill green-pill">On duty</span></div></div><div class="staff-card"><div class="avatar orange-avatar">PS</div><div><b>Priya Shah</b><small>Receptionist</small><span class="pill yellow-pill">On break</span></div></div><div class="staff-card"><div class="avatar teal-avatar">VN</div><div><b>Vikram Nair</b><small>Pharmacist</small><span class="pill green-pill">On duty</span></div></div></div>
+      </section>
+
+      <section class="page" id="page-reports">
+        <div class="page-title"><div><p class="eyebrow blue">HOSPITAL ANALYTICS</p><h1>Reports & Analytics</h1><p class="muted">Review hospital performance and operational summaries.</p></div><button class="primary-btn" onclick="window.print()">⇩ Export Report</button></div>
+        <div class="stats-grid"><div class="stat-card"><div class="stat-icon blue-bg">♙</div><div><small>Patient registrations</small><h2>248</h2><p class="trend positive">This month</p></div></div><div class="stat-card"><div class="stat-icon green-bg">▣</div><div><small>Appointments</small><h2>1,086</h2><p class="trend positive">This month</p></div></div><div class="stat-card"><div class="stat-icon purple-bg">⚕</div><div><small>Doctor consultations</small><h2>962</h2><p class="trend positive">This month</p></div></div><div class="stat-card"><div class="stat-icon orange-bg">₹</div><div><small>Revenue</small><h2>₹8.4L</h2><p class="trend positive">This month</p></div></div></div>
+        <div class="panel report-panel"><h3>Monthly hospital summary</h3><p class="muted">Use Export Report to print or save this page as a PDF.</p><div class="report-bars"><span style="height:44%"></span><span style="height:65%"></span><span style="height:58%"></span><span style="height:80%"></span><span style="height:72%"></span><span style="height:95%"></span><span style="height:86%"></span><span style="height:100%"></span></div><div class="month-labels"><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span></div></div>
+      </section>
+      <footer>© 2026 CarePlus Hospital Management System <span>Secure · Simple · Connected</span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="patientModal"><form class="modal" data-kind="patient"><button type="button" class="close" onclick="closeModal('patientModal')">×</button><p class="eyebrow blue">PATIENT DIRECTORY</p><h2>Register New Patient</h2><div class="form-grid"><label>Full name<input name="name" required placeholder="Patient name"></label><label>Age<input name="age" type="number" min="0" required placeholder="Age"></label><label>Gender<select name="gender"><option>Female</option><option>Male</option><option>Other</option></select></label><label>Phone number<input name="phone" required placeholder="Mobile number"></label><label>Blood group<select name="blood"><option>O+</option><option>A+</option><option>B+</option><option>AB+</option><option>O-</option></select></label><label>Email<input name="email" type="email" placeholder="Email (optional)"></label></div><button class="primary-btn full">Save Patient</button></form></div>
+  <div class="modal-backdrop" id="appointmentModal"><form class="modal" data-kind="appointment"><button type="button" class="close" onclick="closeModal('appointmentModal')">×</button><p class="eyebrow blue">SCHEDULE VISIT</p><h2>Book Appointment</h2><div class="form-grid"><label>Patient name<input name="patient" required placeholder="Patient name"></label><label>Doctor<select name="doctor"><option>Dr. Priya Nair</option><option>Dr. Rahul Mehta</option><option>Dr. Sneha Iyer</option></select></label><label>Date<input name="date" type="date" required value="2026-11-23"></label><label>Time<select name="time"><option>10:00 AM</option><option>11:00 AM</option><option>02:00 PM</option><option>04:00 PM</option></select></label></div><button class="primary-btn full">Confirm Appointment</button></form></div>
+  <div class="modal-backdrop" id="doctorModal"><form class="modal" data-kind="doctor"><button type="button" class="close" onclick="closeModal('doctorModal')">×</button><p class="eyebrow blue">MEDICAL TEAM</p><h2>Add Doctor</h2><div class="form-grid"><label>Doctor name<input name="name" required placeholder="Dr. Full name"></label><label>Specialization<input name="specialty" required placeholder="Specialization"></label><label>Availability<select name="availability"><option>Mon – Sat</option><option>Mon – Fri</option><option>Tue – Sat</option></select></label></div><button class="primary-btn full">Save Doctor</button></form></div>
+  <div class="modal-backdrop" id="billModal"><form class="modal" data-kind="bill"><button type="button" class="close" onclick="closeModal('billModal')">×</button><p class="eyebrow blue">PAYMENTS</p><h2>Generate Bill</h2><div class="form-grid"><label>Patient name<input name="patient" required placeholder="Patient name"></label><label>Service<input name="service" required placeholder="e.g. Consultation"></label><label>Amount (₹)<input name="amount" type="number" min="1" required placeholder="Amount"></label><label>Payment status<select name="status"><option>Paid</option><option>Pending</option></select></label></div><button class="primary-btn full">Create Invoice</button></form></div>
+  <div class="modal-backdrop" id="medicineModal"><form class="modal" data-kind="medicine"><button type="button" class="close" onclick="closeModal('medicineModal')">×</button><p class="eyebrow blue">INVENTORY</p><h2>Add Medicine</h2><div class="form-grid"><label>Medicine name<input name="name" required placeholder="Medicine name"></label><label>Stock quantity<input name="stock" type="number" required placeholder="Quantity"></label><label>Price (₹)<input name="price" type="number" required placeholder="Price"></label></div><button class="primary-btn full">Save Medicine</button></form></div>
+  <div class="modal-backdrop" id="labModal"><form class="modal" data-kind="lab"><button type="button" class="close" onclick="closeModal('labModal')">×</button><p class="eyebrow blue">LABORATORY</p><h2>Add Laboratory Test</h2><div class="form-grid"><label>Patient name<input name="patient" required placeholder="Patient name"></label><label>Test type<input name="test" required placeholder="Test name"></label><label>Date<input name="date" type="date" required></label></div><button class="primary-btn full">Add Test</button></form></div>
+  <div class="modal-backdrop" id="admissionModal"><form class="modal" data-kind="admission"><button type="button" class="close" onclick="closeModal('admissionModal')">×</button><p class="eyebrow blue">INPATIENT SERVICES</p><h2>Admit Patient</h2><div class="form-grid"><label>Patient name<input name="patient" required placeholder="Patient name"></label><label>Ward<select name="ward"><option>General</option><option>Cardiology</option><option>ICU</option></select></label><label>Room / Bed<input name="room" required placeholder="e.g. G-204 / 2"></label></div><button class="primary-btn full">Confirm Admission</button></form></div>
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
