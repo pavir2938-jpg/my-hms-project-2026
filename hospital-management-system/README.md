@@ -26,5 +26,12 @@ A responsive front-end demo inspired by the Hospital Management System reference
 - Staff management
 - Reports and analytics
 
+## Appointment management
+- Book appointments for a patient, doctor, date and time.
+- Reschedule confirmed appointments.
+- Cancel confirmed appointments after a confirmation prompt.
+- Search appointments and filter by status.
+- Appointment and patient demo data are saved in this browser using localStorage.
+
 ## Notes
-This is a front-end demonstration. Form submissions update the page in browser memory only. A real hospital deployment needs a secure backend, database, authentication, access controls, audit logs, backups, and privacy/security review. Do not enter real patient information into this demo.
+This is a front-end demonstration. Data is stored only in the current browser profile using localStorage; it is not shared across devices or users. A real hospital deployment needs a secure backend, database, authentication, access controls, audit logs, backups, and privacy/security review. Do not enter real patient information into this demo.
